@@ -1,0 +1,68 @@
+type PRInfo {
+  branchName: String!
+  title: String!
+  description: String!
+}
+
+type GetDiffResponse {
+  diff: String!
+  info: PRInfo!
+}
+
+input GetDiffInput {
+  bearerToken: String
+  userName: String!
+  repoName: String!
+  prNumber: String!
+}
+
+type ApplySplitResponse {
+  newPRNumber: Int!
+}
+
+input FilePatch {
+  fileName: String!
+  patch: String!
+}
+
+input PRPatchInfo {
+  branchName: String!
+  title: String!
+  description: String!
+  patches: [FilePatch!]!
+}
+
+enum SplitMode {
+  SPLIT
+  STACK
+}
+
+input ApplySplitInput {
+  bearerToken: String!
+  userName: String!
+  repoName: String!
+  prNumber: String!
+  splitMode: SplitMode!
+  base: PRPatchInfo!
+  split: PRPatchInfo!
+}
+
+type GithubProfile @model @auth(rules: [{ allow: public, provider: iam }]) {
+  githubName: String!
+  email: String!
+  bearerToken: String!
+}
+
+type Mutation {
+  getDiff(getDiffInput: GetDiffInput!): GetDiffResponse
+    @function(name: "getDiff-${env}")
+    @auth(rules: [{ allow: public, provider: iam }])
+
+  applySplit(applySplitInput: ApplySplitInput!): ApplySplitResponse
+    @function(name: "applySplit-${env}")
+    @auth(rules: [{ allow: public, provider: iam }])
+
+  githubAuth(code: String!): GithubProfile
+    @function(name: "githubAuth-${env}")
+    @auth(rules: [{ allow: public, provider: iam }])
+}

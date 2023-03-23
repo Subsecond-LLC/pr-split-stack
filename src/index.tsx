@@ -1,19 +1,57 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import awsConfig from './aws-exports';
+import './index.css';
+import {
+  ApolloClient,
+  ApolloProvider,
+  from,
+  HttpLink,
+  InMemoryCache,
+} from '@apollo/client';
+import { Amplify, Auth } from 'aws-amplify';
+import { createAuthLink } from 'aws-appsync-auth-link';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const url = awsConfig.aws_appsync_graphqlEndpoint;
+const region = awsConfig.aws_appsync_region;
+
+Amplify.configure(awsConfig);
+
+Auth.configure({
+  region,
+  identityPoolId: awsConfig.aws_cognito_identity_pool_id,
+});
+
+// Auth.signIn({ username: 'jones@getsubsecond.com', password: 'password' })
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+const httpLink = new HttpLink({
+  uri: url,
+});
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: from([
+    createAuthLink({
+      url: awsConfig.aws_appsync_graphqlEndpoint,
+      auth: {
+        type: 'AWS_IAM',
+        credentials: Auth.Credentials.get(),
+      },
+      region,
+    }),
+    httpLink,
+  ]),
+});
+
+const container = document.getElementById('root');
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(container!);
+
 root.render(
-  <React.StrictMode>
+  <ApolloProvider client={client}>
     <App />
-  </React.StrictMode>
+  </ApolloProvider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

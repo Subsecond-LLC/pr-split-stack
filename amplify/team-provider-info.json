@@ -1,0 +1,74 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-split-staging-184617-authRole",
+      "UnauthRoleArn": "arn:aws:iam::514369576601:role/amplify-split-staging-184617-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::514369576601:role/amplify-split-staging-184617-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-split-staging-184617-deployment",
+      "UnauthRoleName": "amplify-split-staging-184617-unauthRole",
+      "StackName": "amplify-split-staging-184617",
+      "StackId": "arn:aws:cloudformation:us-west-1:514369576601:stack/amplify-split-staging-184617/b027d8a0-b53c-11ed-8c84-069f32599abf",
+      "AmplifyAppId": "d3dcmj8bg5t49l"
+    },
+    "categories": {
+      "auth": {
+        "split": {}
+      },
+      "api": {
+        "split": {}
+      },
+      "function": {
+        "getDiff": {
+          "deploymentBucketName": "amplify-split-staging-184617-deployment",
+          "s3Key": "amplify-builds/getDiff-645a48396631676f3346-build.zip"
+        },
+        "applySplit": {
+          "deploymentBucketName": "amplify-split-staging-184617-deployment",
+          "s3Key": "amplify-builds/applySplit-774453536858326c3738-build.zip"
+        },
+        "githubAuth": {
+          "secretsPathAmplifyAppId": "d3dcmj8bg5t49l",
+          "deploymentBucketName": "amplify-split-staging-184617-deployment",
+          "s3Key": "amplify-builds/githubAuth-46392b53483662344b54-build.zip"
+        }
+      }
+    }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-split-prod-161628-authRole",
+      "UnauthRoleArn": "arn:aws:iam::514369576601:role/amplify-split-prod-161628-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::514369576601:role/amplify-split-prod-161628-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-split-prod-161628-deployment",
+      "UnauthRoleName": "amplify-split-prod-161628-unauthRole",
+      "StackName": "amplify-split-prod-161628",
+      "StackId": "arn:aws:cloudformation:us-west-1:514369576601:stack/amplify-split-prod-161628/c1042bd0-c9d0-11ed-9cd7-06ecc6f769ab",
+      "AmplifyAppId": "d3dcmj8bg5t49l"
+    },
+    "categories": {
+      "auth": {
+        "split": {}
+      },
+      "function": {
+        "getDiff": {
+          "deploymentBucketName": "amplify-split-prod-161628-deployment",
+          "s3Key": "amplify-builds/getDiff-645a48396631676f3346-build.zip"
+        },
+        "applySplit": {
+          "deploymentBucketName": "amplify-split-prod-161628-deployment",
+          "s3Key": "amplify-builds/applySplit-774453536858326c3738-build.zip"
+        },
+        "githubAuth": {
+          "secretsPathAmplifyAppId": "d3dcmj8bg5t49l",
+          "deploymentBucketName": "amplify-split-prod-161628-deployment",
+          "s3Key": "amplify-builds/githubAuth-57474c4f5762414a6956-build.zip"
+        }
+      },
+      "api": {
+        "split": {}
+      }
+    }
+  }
+}
