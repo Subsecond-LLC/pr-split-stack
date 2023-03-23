@@ -52,6 +52,15 @@ function HomeScreen() {
           <p>
             <a href="/torvalds/linux/pull/8">See an example</a>
           </p>
+          <p>
+            <a
+              href="https://github.com/subsecond-llc/pr-split-stack"
+              target="_blank"
+              rel="noreferrer"
+            >
+              File an issue or contribute on Github
+            </a>
+          </p>
         </Card>
       </Content>
     </Page>
