@@ -1,5 +1,5 @@
 const GITHUB_CLIENT_ID = 'b810301f4d209fd90b70';
-const DEPLOYED_APP_URL = 'http://localhost:3000';
+const DEPLOYED_APP_URL = 'https://split.subsecond.app';
 
 export default function getGithubAuthURL(
   userName?: string,
