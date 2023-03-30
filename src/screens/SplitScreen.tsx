@@ -1,6 +1,6 @@
 import { TypedDocumentNode, gql, useMutation } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   ApplySplitMutation,
   ApplySplitMutationVariables,
@@ -17,6 +17,8 @@ import getGithubAuthURL from '../util/getGithubAuthURL';
 import useQueryParams from '../util/useQueryParams';
 import nullThrows from 'capital-t-null-throws';
 import TopBar from '../components/TopBar';
+import Card from '../ui/Card';
+import LoadingModal from '../components/LoadingModal';
 
 const Page = styled.div`
   background-color: #fafbfc;
@@ -30,15 +32,6 @@ const Content = styled.div`
 const DescriptionSections = styled.div`
   display: flex;
   flex-direction: row;
-`;
-
-const Card = styled.div`
-  background-color: #fff;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 12px 16px;
-  width: 100%;
 `;
 
 const Label = styled.div`
@@ -101,45 +94,6 @@ function DescriptionSection({
         onChange={(e) => onChangeData({ ...data, description: e.target.value })}
       />
     </Card>
-  );
-}
-
-const Modal = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-`;
-
-const ModalCardArea = styled.div`
-  width: 100%;
-  max-width: 800px;
-  margin: 200px auto;
-`;
-
-function LoadingModal({
-  message,
-  pullRequestURL,
-}: {
-  message: string;
-  pullRequestURL: string | null;
-}) {
-  return (
-    <Modal>
-      <ModalCardArea>
-        <Card>
-          <h2>{pullRequestURL == null ? 'Loading...' : 'Congratulations'}</h2>
-          <p>{message}</p>
-          {pullRequestURL != null && (
-            <p>
-              <a href={pullRequestURL}>Go to newly generated pull request</a>
-            </p>
-          )}
-        </Card>
-      </ModalCardArea>
-    </Modal>
   );
 }
 
